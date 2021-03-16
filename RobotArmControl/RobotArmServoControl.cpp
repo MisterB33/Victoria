@@ -80,9 +80,9 @@ void setupRobotArmServos() {
      */
     LiftServo.registerUserEaseInFunction(&moveInverseKinematicForLift);
 
-    Serial.println(
-            F(
-                    "Value for 0 degree=" STR(HORIZONTAL_ZERO_DEGREE_VALUE_MICROS) "us. Value for 180 degree=" STR(HORIZONTAL_AT_180_DEGREE_VALUE_MICROS) "us."));
+    //Serial.println(
+    //        F(
+//                    "Value for 0 degree=" STR(HORIZONTAL_ZERO_DEGREE_VALUE_MICROS) "us. Value for 180 degree=" STR(HORIZONTAL_AT_180_DEGREE_VALUE_MICROS) "us."));
 }
 
 void shutdownServos() {

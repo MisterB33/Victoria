@@ -106,7 +106,7 @@ void setup() {
     delay(2000); // To be able to connect Serial monitor after reset or power up and before first printout
 #endif
     // Just to know which program is running on my Arduino
-    Serial.println(F("START " __FILE__ "\r\nVersion " VERSION_EXAMPLE " from " __DATE__));
+    //Serial.println(F("START " __FILE__ "\r\nVersion " VERSION_EXAMPLE " from " __DATE__));
 
 /*
      * delay() to avoid uncontrolled servo moving after power on.
@@ -392,7 +392,7 @@ void handleManualControl() {
             sEndPosition.BackFrontDegree = ServoEasing::ServoEasingNextPositionArray[SERVO_HORIZONTAL];
             sEndPosition.DownUpDegree = ServoEasing::ServoEasingNextPositionArray[SERVO_LIFT];
             unsolve(&sEndPosition);
-            printPositionShortWithUnits(&sEndPosition);
+            //printPositionShortWithUnits(&sEndPosition);
         }
     }
 }
