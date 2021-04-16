@@ -37,7 +37,7 @@ def move(direction):
     elif direction == 'up':
         arduino.write(bytes(str('e;'), 'utf-8'))
     elif direction == 'down':
-        arduino.write(bytes(str('POS\n'), 'utf-8'))
+        arduino.write(bytes(str('p 90,90,90,90,;'), 'utf-8'))
     else:
         flask.abort(400, 'Unknown command?!?!')
 

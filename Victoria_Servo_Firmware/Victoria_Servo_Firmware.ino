@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include <string.h>
 /*
  * To generate the Arduino plotter output, you must activate the line #define PRINT_FOR_SERIAL_PLOTTER in ServoEasing.h
  */
@@ -27,9 +28,44 @@ int SANGLE3 = 90;
 int SANGLE4 = 90;
 int ANG_INC = 30; //default increment angle is set to 10 degrees
 int MSG_REC = 1;
+int ANGL_VAL[4];
 char COMMAND;
+int COUNTER = 0;
 String MSG = "";
-void CommandParser(char command, String msg){
+void DoCommand(char command, String msg){
+        switch( command ){
+                case 'w':
+                SANGLE1 = SANGLE1+ANG_INC; 
+                break ;
+                case 's':
+                SANGLE1 = SANGLE1-ANG_INC;
+                break ;
+                case 'a':
+                SANGLE2 = SANGLE2+ANG_INC; 
+                break ;
+                case 'd':
+                SANGLE2 = SANGLE2-ANG_INC;
+                break ;
+                case 'e':
+                SANGLE3 = SANGLE3+ANG_INC; 
+                break ;
+                case 't':
+                SANGLE3 = SANGLE3-ANG_INC;
+                break ;
+                case 'o':
+                SANGLE4 =180; 
+                break ;
+                case 'c':
+                SANGLE4 = 90;
+                break ;
+                case 'p':
+                SANGLE1 = ANGL_VAL[0];
+                SANGLE2 = ANGL_VAL[1];
+                SANGLE3 = ANGL_VAL[2];
+                SANGLE4 = ANGL_VAL[3];
+                break;
+        
+        }
 }
 
 void setup() {
@@ -156,26 +192,36 @@ void loop() {
 
         Serial.println(c);
         Serial.println(COMMAND);
-        if( c = ';'){
-                if(COMMAND == 'w'){
-                        SANGLE2 = SANGLE2-ANG_INC;
-                        Serial.println("you got here");
-                }if(COMMAND =='s'){
-                        SANGLE2 = SANGLE2+ANG_INC;
-                }
+        if( c == ';'){
+                DoCommand(COMMAND,MSG);
+                //if(COMMAND == 'w'){
+                //        SANGLE2 = SANGLE2-ANG_INC;
+                //        Serial.println("you got here");
+                //}if(COMMAND =='s'){
+                //        SANGLE2 = SANGLE2+ANG_INC;
+                //}
         do{
         setDegreeForAllServos(4,SANGLE1,SANGLE2,SANGLE3,SANGLE4);
         setEaseToForAllServos();
-        updateAllServos();
-        delay(50);
+        //updateAllServos();
         Serial.println("updating...");
-        }while((!updateAllServos()));
+        delay(50);
+        }while(!updateAllServos());
         Serial.println("updated!");
         delay(100);
           MSG = "";
           MSG_REC = 1; 
+          COUNTER = 0;
         }else{
-        MSG.concat(c);
+                if(c != ' '){
+                        MSG.concat(c);
+                }
+                if(c == ','){
+                        ANGL_VAL[COUNTER] = atoi(MSG.c_str());
+                        Serial.println(MSG);
+                        COUNTER = COUNTER +1;
+                }
+          // MSG.concat(c);
         }
 //        setDegreeForAllServos(4,SANGLE1,SANGLE2,SANGLE3,SANGLE4);
 //        delay(50); 
