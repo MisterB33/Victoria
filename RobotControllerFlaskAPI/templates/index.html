@@ -28,24 +28,34 @@
 <table style="width:150px;border:none;">
   <tr>
     <td></td>
-    <td><img src="{{ url_for('static', filename='img/arrow-up.png') }}" data-action="up" class="direction" /></td>
+    <td><img src="{{ url_for('static', filename='img/arrow-up.png') }}"
+    data-action="forward" class="direction" /></td>
     <td></td>
   </tr>
   <tr>
-    <td><img src="{{ url_for('static', filename='img/arrow-left.png') }}" data-action="left" class="direction" /></td>
+    <td><img src="{{ url_for('static', filename='img/arrow-left.png') }}"
+    data-action="left" class="direction" /></td>
     <td></td>
     <td><img src="{{ url_for('static', filename='img/arrow-right.png') }}" data-action="right" class="direction" /></td>
   </tr>
   <tr>
     <td></td>
-    <td><img src="{{ url_for('static', filename='img/arrow-down.png') }}" data-action="down" class="direction" /></td>
+    <td><img src="{{ url_for('static', filename='img/arrow-down.png') }}"
+    data-action="backward" class="direction" /></td>
     <td></td>
   </tr>
 </table>
 </div>
+  <tr>
+    <td></td>
+    <td><img src="{{ url_for('static', filename='img/arrow-up.png') }}" data-action="up" class="direction" /></td>
+    <td></td>
+  </tr>
 
-<div class="jumbotron">
-  <h1>Hello, world!</h1>
-  <p>...</p>
-  <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
-</div>
+  <tr>
+    <td></td>
+    <td><img src="{{ url_for('static', filename='img/arrow-down.png') }}"
+    data-action="down" class="direction" /></td>
+    <td></td>
+  </tr>
+

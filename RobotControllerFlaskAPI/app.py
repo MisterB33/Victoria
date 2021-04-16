@@ -26,30 +26,22 @@ def move(direction):
     
     """Move in a direction."""
     global Rot
-    if direction == 'up':
-        Rot = Rot+100
-        if Rot >= 1000:
-            Rot = 1000
-        print(Rot)
-        arduino.write(bytes(str('w'), 'utf-8'))
-        #data = arduino.readline()
-        #print(data)
-    elif direction == 'down':
-        if Rot <= 0 : 
-            Rot = 0
-        print(Rot)
-        Rot = Rot-100
-        arduino.write(bytes(str('s'), 'utf-8'))
-        data = arduino.readline()
-        print(data)
-    elif direction == 'left':
-        pin_number = 12
+    if direction == 'forward':
+        arduino.write(bytes(str('w;'), 'utf-8'))
+    elif direction == 'backward':
+        arduino.write(bytes(str('s;'), 'utf-8'))
+    elif direction == 'left': 
+        arduino.write(bytes(str('d;'), 'utf-8'))
     elif direction == 'right':
-        pin_number = 13
+        arduino.write(bytes(str('a;'), 'utf-8'))
+    elif direction == 'up':
+        arduino.write(bytes(str('e;'), 'utf-8'))
+    elif direction == 'down':
+        arduino.write(bytes(str('POS\n'), 'utf-8'))
     else:
         flask.abort(400, 'Unknown command?!?!')
 
-    time.sleep(1)
+##    time.sleep(1)
 
     return 'OK'
 
