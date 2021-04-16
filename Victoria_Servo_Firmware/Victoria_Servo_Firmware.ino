@@ -64,6 +64,9 @@ void DoCommand(char command, String msg){
                 SANGLE3 = ANGL_VAL[2];
                 SANGLE4 = ANGL_VAL[3];
                 break;
+                case 'S':
+                setSpeedForAllServos(ANGL_VAL[0]);
+                break;
         
         }
 }
@@ -153,6 +156,8 @@ void setup() {
     Servo4.startEaseToD(SANGLE4, 200);    
     delay(1000);
     Serial.flush();
+    
+    setSpeedForAllServos(100);
 //    Serial.read();
 
 //   setEaseToForAllServos();
@@ -167,7 +172,6 @@ void loop() {
 //#else
 //    tSpeed = map(tSpeed, 0, 1023, 5, 150);
 //#endif
-    setSpeedForAllServos(100);
 
     /*
      * Move three servos synchronously without interrupt handler
@@ -208,7 +212,7 @@ void loop() {
         delay(50);
         }while(!updateAllServos());
         Serial.println("updated!");
-        delay(100);
+        //delay(100);
           MSG = "";
           MSG_REC = 1; 
           COUNTER = 0;
@@ -219,6 +223,7 @@ void loop() {
                 if(c == ','){
                         ANGL_VAL[COUNTER] = atoi(MSG.c_str());
                         Serial.println(MSG);
+                        MSG = "";
                         COUNTER = COUNTER +1;
                 }
           // MSG.concat(c);
