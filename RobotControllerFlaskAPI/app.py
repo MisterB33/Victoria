@@ -1,12 +1,9 @@
 """Flask app to control a robot arm - run on a Raspberry Pi."""
 import flask
-import RPi.GPIO as GPIO
 import time
 import serial
 
-Rot = 0 
 arduino = serial.Serial(port="/dev/ttyUSB0", baudrate=115200, timeout =.1)
-print(Rot)
 
 
 
@@ -25,7 +22,6 @@ def index():
 def move(direction):
     
     """Move in a direction."""
-    global Rot
     if direction == 'forward':
         arduino.write(bytes(str('w;'), 'utf-8'))
     elif direction == 'backward':
@@ -35,14 +31,33 @@ def move(direction):
     elif direction == 'right':
         arduino.write(bytes(str('a;'), 'utf-8'))
     elif direction == 'up':
-        arduino.write(bytes(str('R;'), 'utf-8'))
+        arduino.write(bytes(str('e;'), 'utf-8'))
     elif direction == 'down':
-        arduino.write(bytes(str('S 250,;p 90,90,90,90,;p 170,90,90,90,;'), 'utf-8'))
+        arduino.write(bytes(str('t;'), 'utf-8'))
+    elif direction == "open":
+        arduino.write(bytes(str('o,;'), 'utf-8')) 
+    elif direction == "close":
+        arduino.write(bytes(str('c,;'), 'utf-8'))
+    elif direction == "Clear":
+        f = open("commands.txt", 'w')
+        f.write("")
+        f.close()
     elif direction == "Record":
+        f = open("commands.txt", "a")
         arduino.write(bytes(str('R;'), 'utf-8'))
         msg = arduino.readline()
+        f.write(str(msg.decode("utf-8")))
+        f.close()
         print(msg.decode("utf-8"))
         print("\n")
+    elif direction == "Play":
+        f = open("commands.txt","r")
+        lines = f.readlines()
+        for line in lines:
+            line = line.strip("\n")
+            arduino.write(bytes(str(line),'utf-8'))
+            time.sleep(.5)
+        f.close()
     else:
         flask.abort(400, 'Unknown command?!?!')
 

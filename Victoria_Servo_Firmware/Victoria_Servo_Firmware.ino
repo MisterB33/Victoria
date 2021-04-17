@@ -70,6 +70,9 @@ void DoCommand(char command, String msg){
                 case 'S':
                 setSpeedForAllServos(ANGL_VAL[0]);
                 break;
+                case 'A':
+                ANG_INC = ANGL_VAL[0];
+                break;
                 case 'R':
                 sprintf(BUF,"p %d,%d,%d,%d,;",SANGLE1,SANGLE2,SANGLE3,SANGLE4);
                 Serial.println(BUF); 
