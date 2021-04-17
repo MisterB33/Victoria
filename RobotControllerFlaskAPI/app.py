@@ -35,9 +35,14 @@ def move(direction):
     elif direction == 'right':
         arduino.write(bytes(str('a;'), 'utf-8'))
     elif direction == 'up':
-        arduino.write(bytes(str('e;'), 'utf-8'))
+        arduino.write(bytes(str('R;'), 'utf-8'))
     elif direction == 'down':
         arduino.write(bytes(str('S 250,;p 90,90,90,90,;p 170,90,90,90,;'), 'utf-8'))
+    elif direction == "Record":
+        arduino.write(bytes(str('R;'), 'utf-8'))
+        msg = arduino.readline()
+        print(msg.decode("utf-8"))
+        print("\n")
     else:
         flask.abort(400, 'Unknown command?!?!')
 

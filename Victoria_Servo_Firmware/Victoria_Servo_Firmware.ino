@@ -32,6 +32,9 @@ int ANGL_VAL[4];
 char COMMAND;
 int COUNTER = 0;
 String MSG = "";
+
+char BUF[11];
+
 void DoCommand(char command, String msg){
         switch( command ){
                 case 'w':
@@ -67,7 +70,13 @@ void DoCommand(char command, String msg){
                 case 'S':
                 setSpeedForAllServos(ANGL_VAL[0]);
                 break;
-        
+                case 'R':
+                sprintf(BUF,"p %d,%d,%d,%d,;",SANGLE1,SANGLE2,SANGLE3,SANGLE4);
+                Serial.println(BUF); 
+                break;
+                case 'W':
+                // insert the wait command option
+                break;
         }
 }
 
@@ -143,7 +152,6 @@ void setup() {
 #ifndef PRINT_FOR_SERIAL_PLOTTER
     Serial.println(F("Move from 90 to 45 degree in 1 second"));
 #endif
-//delay(1000);
 
     Servo1.setEasingType(EASE_SINE_IN_OUT);
     Servo2.setEasingType(EASE_SINE_IN_OUT);
@@ -158,61 +166,32 @@ void setup() {
     Serial.flush();
     
     setSpeedForAllServos(100);
-//    Serial.read();
 
-//   setEaseToForAllServos();
 //   synchronizeAllServosAndStartInterrupt(true); // false, since we call updateAllServos() manually below
 }
 
 void loop() {
-
-//    uint16_t tSpeed = analogRead(SPEED_IN_PIN);
-//#if defined(__STM32F1__)
-//    tSpeed = map(tSpeed, 0, 4096, 5, 150); // 12 bit ADC
-//#else
-//    tSpeed = map(tSpeed, 0, 1023, 5, 150);
-//#endif
-
     /*
      * Move three servos synchronously without interrupt handler
      */
     /*
      * Here we use the allServos functions
      */
-//   updateAllServos();   
-//   setEaseToForAllServos();
-//    synchronizeAllServosAndStartInterrupt(true); // false, since we call updateAllServos() manually below
-//   do {
        while(Serial.available()){ // here you can call your own program`
         char  c = Serial.read();
         if(MSG_REC==1){
-//        c = Serial.read(); 
         COMMAND = c;
-        //Serial.println(COMMAND);
         MSG_REC = 0;
         continue;
         }
-        //c = Serial.read();
-
-        Serial.println(c);
-        Serial.println(COMMAND);
         if( c == ';'){
                 DoCommand(COMMAND,MSG);
-                //if(COMMAND == 'w'){
-                //        SANGLE2 = SANGLE2-ANG_INC;
-                //        Serial.println("you got here");
-                //}if(COMMAND =='s'){
-                //        SANGLE2 = SANGLE2+ANG_INC;
-                //}
         do{
         setDegreeForAllServos(4,SANGLE1,SANGLE2,SANGLE3,SANGLE4);
         setEaseToForAllServos();
         //updateAllServos();
-        Serial.println("updating...");
         delay(50);
         }while(!updateAllServos());
-        Serial.println("updated!");
-        //delay(100);
           MSG = "";
           MSG_REC = 1; 
           COUNTER = 0;
@@ -222,13 +201,9 @@ void loop() {
                 }
                 if(c == ','){
                         ANGL_VAL[COUNTER] = atoi(MSG.c_str());
-                        Serial.println(MSG);
                         MSG = "";
                         COUNTER = COUNTER +1;
                 }
-          // MSG.concat(c);
         }
-//        setDegreeForAllServos(4,SANGLE1,SANGLE2,SANGLE3,SANGLE4);
-//        delay(50); 
 }
 }
