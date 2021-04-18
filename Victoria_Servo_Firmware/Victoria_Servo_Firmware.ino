@@ -38,22 +38,40 @@ char BUF[11];
 void DoCommand(char command, String msg){
         switch( command ){
                 case 'w':
-                SANGLE1 = SANGLE1+ANG_INC; 
+                SANGLE1 = SANGLE1+ANG_INC;
+                if(SANGLE1>180){
+                        SANGLE1 = 180;
+                }
                 break ;
                 case 's':
                 SANGLE1 = SANGLE1-ANG_INC;
+                if(SANGLE1<0){
+                        SANGLE1 = 0;
+                }
                 break ;
                 case 'a':
                 SANGLE2 = SANGLE2+ANG_INC; 
+                if(SANGLE2>180){
+                        SANGLE2 = 180;
+                }
                 break ;
                 case 'd':
                 SANGLE2 = SANGLE2-ANG_INC;
+                if(SANGLE2<0){
+                        SANGLE2 = 0;
+                }
                 break ;
                 case 'e':
                 SANGLE3 = SANGLE3+ANG_INC; 
+                if(SANGLE3>180){
+                        SANGLE3 = 180;
+                }
                 break ;
                 case 't':
                 SANGLE3 = SANGLE3-ANG_INC;
+                if(SANGLE3<0){
+                        SANGLE3 = 0;
+                }
                 break ;
                 case 'o':
                 SANGLE4 =180; 

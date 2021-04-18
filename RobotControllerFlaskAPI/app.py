@@ -35,9 +35,9 @@ def move(direction):
     elif direction == 'down':
         arduino.write(bytes(str('t;'), 'utf-8'))
     elif direction == "open":
-        arduino.write(bytes(str('o,;'), 'utf-8')) 
+        arduino.write(bytes(str('o;'), 'utf-8')) 
     elif direction == "close":
-        arduino.write(bytes(str('c,;'), 'utf-8'))
+        arduino.write(bytes(str('c;'), 'utf-8'))
     elif direction == "Clear":
         f = open("commands.txt", 'w')
         f.write("")
@@ -54,9 +54,12 @@ def move(direction):
         f = open("commands.txt","r")
         lines = f.readlines()
         for line in lines:
-            line = line.strip("\n")
-            arduino.write(bytes(str(line),'utf-8'))
-            time.sleep(.5)
+            temp = line.strip("\n")
+            temp = temp.strip("\r")
+            if temp != "":
+                arduino.write(bytes(str(temp),'utf-8'))
+                arduino.flush()
+                time.sleep(1)
         f.close()
     else:
         flask.abort(400, 'Unknown command?!?!')

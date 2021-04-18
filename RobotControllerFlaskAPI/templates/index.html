@@ -24,38 +24,99 @@
     });
 
 </script>
+<nav class= "navbar navbar-default">
+<div class="container-fluid">i
+<div class="navbar-header">
+  <a class= "navbar-brand" href="#">Ohlone college</a>
+</div>
+</div>
+</nav>
+<div class ="jumbotron text-center">
+<h1>Ohlone College Mechatronis Work Shop!</h1>
+</div>
 <div class ="jumbotron">
+<div class = "row">
+<div class="col-sm-6">
 <table style="width:150px;border:none;">
+  
   <tr>
     <td></td>
-    <td><img src="{{ url_for('static', filename='img/arrow-up.png') }}"
+    <td><img src="{{ url_for('static', filename='img/Up_Arrow.png') }}"
     data-action="forward" class="direction" /></td>
     <td></td>
   </tr>
   <tr>
-    <td><img src="{{ url_for('static', filename='img/arrow-left.png') }}"
+    <td><img src="{{ url_for('static', filename='img/Left_Arrow.png') }}"
     data-action="left" class="direction" /></td>
     <td></td>
-    <td><img src="{{ url_for('static', filename='img/arrow-right.png') }}" data-action="right" class="direction" /></td>
+    <td><img src="{{ url_for('static', filename='img/Right_Arrow.png') }}" 
+    data-action="right" class="direction" /></td>
   </tr>
   <tr>
     <td></td>
-    <td><img src="{{ url_for('static', filename='img/arrow-down.png') }}"
+    <td><img src="{{ url_for('static', filename='img/Down_Arrow.png') }}"
     data-action="backward" class="direction" /></td>
     <td></td>
   </tr>
 </table>
 </div>
+<div class = "col-sm-6">
   <tr>
     <td></td>
-    <td><img src="{{ url_for('static', filename='img/arrow-up.png') }}" data-action="Play" class="direction" /></td>
+    <td><img src="{{ url_for('static', filename='img/Up_Arrow.png') }}" data-action="up" class="direction" /></td>
     <td></td>
   </tr>
 
   <tr>
     <td></td>
-    <td><img src="{{ url_for('static', filename='img/arrow-down.png') }}"
+    <td><img src="{{ url_for('static', filename='img/Down_Arrow.png') }}"
+    data-action="down" class="direction" /></td>
+    <td></td>
+  </tr>
+<div class="row">
+
+  <tr>
+    <td></td>
+    <td><img src="{{ url_for('static', filename='img/green_square.png') }}"
+    data-action="open" class="direction" /></td>
+    <td></td>
+  </tr>
+
+  <tr>
+    <td></td>
+    <td><img src="{{ url_for('static', filename='img/red_square.png') }}"
+    data-action="close" class="direction" /></td>
+    <td></td>
+  </tr>
+
+<div class= "row">
+
+
+  <tr>
+    <td></td>
+    <td><img src="{{ url_for('static', filename='img/Red_Circle.png') }}"
     data-action="Record" class="direction" /></td>
     <td></td>
   </tr>
+
+  <tr>
+    <td></td>
+    <td><img src="{{ url_for('static', filename='img/Green_Circle.png') }}"
+    data-action="Play" class="direction" /></td>
+    <td></td>
+  </tr>
+
+  <tr>
+    <td></td>
+    <td><img src="{{ url_for('static', filename='img/Purple_Circle.png') }}"
+    data-action="Clear" class="direction" /></td>
+    <td></td>
+  </tr>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
 
